@@ -41,7 +41,6 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Text;
 
 /**
  * Convert csv to tmx 1.4b.
@@ -56,6 +55,11 @@ public class Csv2Tmx14b {
     private static final String INPUT_LANG = "en-US";
     private static final String OUTPUT_LANG = "ja-JP";
 
+    /**
+     * Entry point.
+     * @param args arguments.
+     * @throws IOException IO Exception occurred.
+     */
     public static void main(String[] args) throws IOException {
         System.err.println("csv2tmx: begin.");
 
@@ -96,8 +100,7 @@ public class Csv2Tmx14b {
                     Element eleSeg = document.createElement("seg");
                     eleTuvOrg.appendChild(eleSeg);
                     // 1st column.
-                    Text text = document.createTextNode(record.get(0));
-                    eleSeg.appendChild(text);
+                    eleSeg.appendChild(document.createTextNode(record.get(0)));
                 }
                 eleTu.appendChild(eleTuvOrg);
 
@@ -107,8 +110,7 @@ public class Csv2Tmx14b {
                     Element eleSeg = document.createElement("seg");
                     eleTuvDst.appendChild(eleSeg);
                     // 2nd column.
-                    Text text = document.createTextNode(record.get(1));
-                    eleSeg.appendChild(text);
+                    eleSeg.appendChild(document.createTextNode(record.get(1)));
                 }
                 eleTu.appendChild(eleTuvDst);
             }
