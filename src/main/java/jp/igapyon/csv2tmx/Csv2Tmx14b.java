@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -43,11 +44,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
 /**
- * Convert csv to tmx.
+ * Convert csv to tmx 1.4b.
  * 
  * @author Toshiki Iga
  */
-public class Csv2Tmx {
+public class Csv2Tmx14b {
     private static final String INPUT_CSV = "src/main/resources/sample.csv";
     private static final String OUTPUT_TMX = "target/test.tmx";
 
@@ -68,13 +69,13 @@ public class Csv2Tmx {
         // header
         {
             Element eleHeader = document.createElement("header");
-            eleHeader.setAttribute("creationtool", "igapyon csv2tmx");
-            eleHeader.setAttribute("creationtoolversion", "1.0");
+            eleHeader.setAttribute("creationtool", "igapyon csv2tmx"); // Tool name.
+            eleHeader.setAttribute("creationtoolversion", "1.0"); // Tool version.
+            eleHeader.setAttribute("segtype", "block"); // block, paragraph, sentence, phrase
             eleHeader.setAttribute("o-tmf", "XLIFF");
-            eleHeader.setAttribute("datatype", "unknown");
-            eleHeader.setAttribute("segtype", "block");
             eleHeader.setAttribute("adminlang", ADMIN_LANG);
             eleHeader.setAttribute("srclang", INPUT_LANG);
+            eleHeader.setAttribute("datatype", "unknown"); // default.
             eleTmx.appendChild(eleHeader);
         }
 
@@ -145,6 +146,8 @@ public class Csv2Tmx {
         try {
             new File("target").mkdirs();
             final Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             final DOMSource source = new DOMSource(element);
             final OutputStream outStream = new BufferedOutputStream(new FileOutputStream(new File(OUTPUT_TMX)));
             final StreamResult target = new StreamResult(outStream);
