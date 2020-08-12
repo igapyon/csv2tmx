@@ -39,6 +39,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.input.BOMInputStream;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -96,8 +97,8 @@ public class Csv2Tmx14b {
         eleTmx.appendChild(eleBody);
 
         System.err.println("csv2tmx: read csv file.");
-        try (CSVParser parseCsv = CSVFormat.DEFAULT
-                .parse(new BufferedReader(new InputStreamReader(new FileInputStream(INPUT_CSV), "UTF-8")))) {
+        try (CSVParser parseCsv = CSVFormat.DEFAULT.parse(new BufferedReader(
+                new InputStreamReader(new BOMInputStream(new FileInputStream(INPUT_CSV)), "UTF-8")))) {
             for (CSVRecord record : parseCsv.getRecords()) {
                 Element eleTu = document.createElement("tu");
                 eleBody.appendChild(eleTu);
