@@ -48,12 +48,20 @@ import org.w3c.dom.Element;
  * @author Toshiki Iga
  */
 public class Csv2Tmx14b {
+    /** Input CSV */
     private static final String INPUT_CSV = "src/main/resources/sample.csv";
+    // private static final String INPUT_CSV = "target/sample.csv";
+
+    /** Input Lang */
+    private static final String INPUT_LANG = "en-US";
+
+    /** Output TMX */
     private static final String OUTPUT_TMX = "target/sample.tmx";
 
-    private static final String ADMIN_LANG = "en-US";
-    private static final String INPUT_LANG = "en-US";
+    /** Output Lang */
     private static final String OUTPUT_LANG = "ja-JP";
+
+    private static final String ADMIN_LANG = "en-US";
 
     /**
      * Entry point.
