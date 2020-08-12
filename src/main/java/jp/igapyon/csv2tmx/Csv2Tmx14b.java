@@ -49,7 +49,7 @@ import org.w3c.dom.Element;
  */
 public class Csv2Tmx14b {
     private static final String INPUT_CSV = "src/main/resources/sample.csv";
-    private static final String OUTPUT_TMX = "target/test.tmx";
+    private static final String OUTPUT_TMX = "target/sample.tmx";
 
     private static final String ADMIN_LANG = "en-US";
     private static final String INPUT_LANG = "en-US";
@@ -61,7 +61,7 @@ public class Csv2Tmx14b {
      * @throws IOException IO Exception occurred.
      */
     public static void main(String[] args) throws IOException {
-        System.err.println("csv2tmx: begin.");
+        System.err.println("csv2tmx: begin: " + INPUT_CSV);
 
         // Create empty document.
         final Document document = createEmptyDocument();
@@ -120,7 +120,7 @@ public class Csv2Tmx14b {
         System.err.println("csv2tmx: write xml file.");
         dom2xml(eleTmx);
 
-        System.err.println("csv2tmx: end.");
+        System.err.println("csv2tmx: end: " + OUTPUT_TMX);
     }
 
     /**
